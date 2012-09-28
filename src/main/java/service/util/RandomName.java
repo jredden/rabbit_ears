@@ -1,4 +1,4 @@
-package service.messages;
+package service.util;
 
 import java.util.ArrayList;
 import java.util.List;

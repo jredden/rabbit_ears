@@ -1,24 +1,23 @@
-package service.messages;
+package service.worker;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import service.config.ConfigException;
 import service.config.CredentialSignature;
+import service.messages.MessageException;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.QueueingConsumer;
 
-public class BasicConsumerTest extends AbstractBasicTest {
+public class BasicConsumerWorker extends AbstractWorker implements Runnable {
 
 	private Channel channel;
 	private QueueingConsumer queueingConsumer;
-	private static Logger log = LoggerFactory.getLogger(BasicConsumerTest.class);
+	private static Logger log = LoggerFactory.getLogger(BasicConsumerWorker.class);
 
-	@Before
-	public void setUp() {
+
+	private void setUp() {
 		try {
 			channel = super.setUpChannel(CredentialSignature.SIMPLE_PROPERTIES);
 		} catch (ConfigException ce) {
@@ -34,7 +33,6 @@ public class BasicConsumerTest extends AbstractBasicTest {
 		}
 	}
 
-	@Test
 	public void simpleConsumerTest() {
 		String message = null;
 		try {
@@ -43,6 +41,13 @@ public class BasicConsumerTest extends AbstractBasicTest {
 			me.printStackTrace();
 		}
 		log.info("consumed message "+message);
+	}
+
+	@Override
+	public void run() {
+		setUp();
+		simpleConsumerTest();
+		
 	}
 
 }
