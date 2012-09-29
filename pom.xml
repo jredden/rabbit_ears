@@ -61,6 +61,10 @@
 					<archive>
 						<manifest>
 							<mainClass>service.app.BasicApp</mainClass>
+							<mainClass>service.app.ProducerConsumerApp</mainClass>
+							<mainClass>service.app.RouteApp</mainClass>
+							<mainClass>service.app.TopicApp</mainClass>
+							<mainClass>service.app.WorkApp</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
