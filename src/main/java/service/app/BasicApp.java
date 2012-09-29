@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import service.worker.BasicConsumerWorker;
 import service.worker.BasicProducerWorker;
 
-public class BasicApp {
+public class BasicApp implements IParameters{
 	private static Logger log = LoggerFactory.getLogger(BasicApp.class);
 	/**
 	 * 
@@ -18,6 +18,12 @@ public class BasicApp {
 		Thread basicConsumerWorker = new Thread(new BasicConsumerWorker());
 		log.info("start consumer");
 		basicConsumerWorker.start();
+		try {
+			Thread.sleep(WAIT_TIME.intValue());
+		} catch (InterruptedException ie) {
+			ie.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -25,7 +31,7 @@ public class BasicApp {
 	 */
 	public static void main(String[] args) {
 		application();
-
+		System.exit(0);  // exit all threads
 	}
 
 }
